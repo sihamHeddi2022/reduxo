@@ -1,9 +1,13 @@
-import { applyMiddleware, combineReducers, createStore } from 'redux'
-import reducer from './reducers'
-export * as actionCreators from "./actionCreators/index"
-import thunk from "redux-thunk"
+import { configureStore } from "@reduxjs/toolkit";
+import { counterSlice } from "./reducers";
 
-export const r= combineReducers({counter:reducer })
 
-export const store = createStore(r,{},
-    applyMiddleware(thunk))
+export const {increment,decrement}= counterSlice.actions
+
+
+
+export const store = configureStore({
+    reducer: {
+        counter:counterSlice.reducer
+    },
+})
